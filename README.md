@@ -1,5 +1,7 @@
 # vue-video-browser
 
+![](https://meta.filipstepien.com/videobrowser.gif)
+
 ## Project setup
 ```
 yarn install

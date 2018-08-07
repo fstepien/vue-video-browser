@@ -1,13 +1,17 @@
 <template>
     <div class="container">
         <SearchBar @termChange="onTermChange"></SearchBar>
-        <VideoList :videos="videos"></VideoList>
+        <div class="row">
+            <VideoList :videos="videos" @videoSelect="onVideoSelect"></VideoList>
+            <VideoDetail :video="selectedVideo"></VideoDetail>
+        </div>
     </div>
 </template>
 
 <script>
 import SearchBar from "./components/SearchBar"
 import VideoList from "./components/VideoList"
+import VideoDetail from "./components/VideoDetail"
 import axios from 'axios'
 const API_KEY = 'AIzaSyC1UfAuWRUzj1ryFCXIc6XBERsdg6knNnE'
 
@@ -15,11 +19,13 @@ export default {
 name: 'App',
 components: {
     SearchBar,
-    VideoList
+    VideoList,
+    VideoDetail
 }, 
 data() {
 return {
-    videos: []
+    videos: [],
+    selectedVideo: null
 }
 },
 methods: {
@@ -34,6 +40,9 @@ methods: {
                 q: searchTerm
             }
         }).then(response => this.videos = response.data.items)
+    },
+    onVideoSelect(video) {
+        this.selectedVideo = video
     }
 }
 
